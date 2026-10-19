@@ -1,0 +1,55 @@
+name: Tuk
+options:
+  bundleIdPrefix: com.hys39
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  Tuk:
+    type: application
+    platform: iOS
+    sources:
+      - Tuk
+      - Shared
+    info:
+      path: Tuk/Info.plist
+      properties:
+        CFBundleDisplayName: 툭
+        NSSupportsLiveActivities: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.hys39.tuk
+        GENERATE_INFOPLIST_FILE: NO
+    dependencies:
+      - target: TukWidget
+        embed: true
+  TukWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - TukWidget
+      - Shared
+    info:
+      path: TukWidget/Info.plist
+      properties:
+        CFBundleDisplayName: 툭 위젯
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.hys39.tuk.widget
+        GENERATE_INFOPLIST_FILE: NO
+schemes:
+  Tuk:
+    build:
+      targets:
+        Tuk: all
+        TukWidget: all
